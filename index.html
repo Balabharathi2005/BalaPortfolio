@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balabharathi Y - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:wght@300;400;500&family=Bricolage+Grotesque:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0A0E27;
+            --accent: #00F5A0;
+            --accent-2: #00D9F5;
+            --text: #E8E8E8;
+            --text-dim: #9BA4B5;
+            --surface: #131829;
+            --surface-2: #1A1F3A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Mono', monospace;
+            background: var(--primary);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated background grid */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 245, 160, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 245, 160, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Glowing cursor effect */
+        .cursor-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 245, 160, 0.15), transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+            transition: transform 0.2s ease;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header/Hero Section */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .name-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease 0.2s backwards;
+            white-space: nowrap;
+        }
+
+        .subtitle {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+
+        .contact-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            border-bottom-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-family: 'Bricolage Grotesque', sans-serif;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.8s backwards;
+            position: relative;
+            overflow: hidden;
+            font-size: 1.1rem;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.3s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 245, 160, 0.3);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-number {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 3rem;
+            color: var(--accent);
+            opacity: 0.3;
+        }
+
+        .section-title {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--surface);
+            padding: 2rem;
+            border: 1px solid rgba(0, 245, 160, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 40px rgba(0, 245, 160, 0.1);
+        }
+
+        .skill-category h3 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.5rem 0;
+            color: var(--text-dim);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .skill-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Education Timeline */
+        .education-timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .education-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent), var(--accent-2));
+        }
+
+        .education-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background: var(--surface);
+            border: 1px solid rgba(0, 245, 160, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .education-item::before {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 2rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 20px var(--accent);
+        }
+
+        .education-item:hover {
+            transform: translateX(10px);
+            border-color: var(--accent);
+        }
+
+        .education-degree {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-institution {
+            color: var(--text);
+            margin-bottom: 0.3rem;
+        }
+
+        .education-year {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .education-score {
+            margin-top: 0.5rem;
+            color: var(--accent-2);
+            font-weight: 500;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--surface);
+            padding: 2rem;
+            border: 1px solid rgba(0, 245, 160, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(0, 245, 160, 0.1), transparent);
+            transform: translate(50%, -50%);
+        }
+
+        .project-card:hover {
+            transform: scale(1.02);
+            border-color: var(--accent);
+            box-shadow: 0 20px 60px rgba(0, 245, 160, 0.15);
+        }
+
+        .project-title {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+
+        /* Certifications List */
+        .certifications-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .certification-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: var(--surface);
+            border-left: 4px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .certification-item:hover {
+            transform: translateX(10px);
+            background: var(--surface-2);
+        }
+
+        .cert-icon {
+            font-size: 2rem;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .cert-content h3 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+        }
+
+        .cert-provider {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* Achievements */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .achievement-card {
+            background: linear-gradient(135deg, var(--surface), var(--surface-2));
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(0, 245, 160, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .achievement-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+
+        .achievement-number {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-text {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 0 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(0, 245, 160, 0.1);
+        }
+
+        .footer-text {
+            color: var(--text-dim);
+            margin-bottom: 1rem;
+
+        }
+        .my_profile {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            position: relative;
+            top: 10px;
+            left: 90%;
+            object-fit: cover;
+            border: 4px solid var(--accent);
+            box-shadow: 0 0 20px var(--accent);
+
+            
+        }
+        .name-title {
+            position: relative;
+            right: 35%;
+        }
+        .subtitle {
+            position: relative;
+            right: 35%;
+        }
+        .contact-links {
+            position: relative;
+            right: 35%;
+        }
+        .cta-button {
+            position: relative;
+            right: 35%;
+        }
+        .my_profile{
+            position: relative;
+            top: 100%;
+            left: 90%;
+            transform: scale(1.1);
+
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            transform: scale(1.2);
+            color: var(--accent-2);
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <header>
+            <div class="hero-content">
+                <img class="my_profile" src="Gemini_Generated_Image_q9qczwq9qczwq9.png"alt="Profile Picture">
+                <h1 class="name-title">BALABHARATHI Y</h1>
+                
+                <p class="subtitle">Computer Science Engineer | Java Developer</p>
+                
+                <div class="contact-links">
+                    <a href="/cdn-cgi/l/email-protection#ceacafa2afaca6afbcafbaa6a7f7f9f6f9fbfa8ea9a3afa7a2e0ada1a3" class="contact-link"><span class="__cf_email__" data-cfemail="cba9aaa7aaa9a3aab9aabfa3a2f2fcf3fcfeff8baca6aaa2a7e5a8a4a6">balabharathi978754@gmail.com</span></a>
+                    <a href="tel:9361080794" class="contact-link">+91 9361080794</a>
+                    <a href="https://www.linkedin.com/in/bala-bharathi-032a562a3" target="_blank" class="contact-link">LinkedIn</a>
+                    <a href="https://github.com/Balabharathi2005" target="_blank" class="contact-link">GitHub</a>
+                </div>
+                
+                <a href="#projects" class="cta-button">VIEW MY WORK</a>
+                <a href="Balabharathi-Resume.pdf" class="cta-button" download="Balabharathi-Resume.pdf">Dowmload Resume</a>
+            </div>
+        </header>
+
+        <!-- About Section -->
+        <section id="about">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2 class="section-title">About Me</h2>
+            </div>
+            <p style="color: var(--text-dim); font-size: 1.2rem; max-width: 800px; line-height: 1.8;">
+                Aspiring IT professional pursuing B.E in Computer Science with a passion for solving complex problems through code. 
+                Specializing in Java development and backend technologies, I'm committed to maximizing my skills and contributing 
+                to innovative solutions that drive company growth with a clear and positive approach.
+            </p>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title">Technical Arsenal</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category fade-in">
+                    <h3>Programming Languages</h3>
+                    <ul class="skill-list">
+                        <li>C</li>
+                        <li>Java (Core)</li>
+                        <li>Python</li>
+                    </ul>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3>Web Technologies</h3>
+                    <ul class="skill-list">
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>JavaScript (Basic)</li>
+                    </ul>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3>Database</h3>
+                    <ul class="skill-list">
+                        <li>SQL</li>
+                    </ul>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3>Core Expertise</h3>
+                    <ul class="skill-list">
+                        <li>Data Structures (Java)</li>
+                        <li>Backend Development</li>
+                        <li>Problem Solving</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2 class="section-title">Education</h2>
+            </div>
+            <div class="education-timeline">
+                <div class="education-item">
+                    <h3 class="education-degree">B.E in Computer Science</h3>
+                    <p class="education-institution">K S Rangasamy College of Technology, Tiruchengode</p>
+                    <p class="education-year">Expected 2027</p>
+                    <p class="education-score">CGPA: 8.49/10</p>
+                </div>
+                <div class="education-item">
+                    <h3 class="education-degree">Higher Secondary Certificate (HSC)</h3>
+                    <p class="education-score">Percentage: 90.83%</p>
+                </div>
+                <div class="education-item">
+                    <h3 class="education-degree">Secondary School Leaving Certificate (SSLC)</h3>
+                    <p class="education-score">Percentage: 80.01%</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2 class="section-title">Featured Projects</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <h3 class="project-title">MedHub</h3>
+                    <p class="project-description">
+                        A comprehensive online medical consultancy and departmental store management system. Streamlines operations 
+                        by efficiently handling employee and product data, generating detailed billing and profit reports, and maintaining 
+                        inventory control. Identifies discrepancies in stock, manages store income, and displays product information, 
+                        thereby enhancing operational transparency and customer service.
+                    </p>
+                </div>
+                <div class="project-card fade-in">
+                    <h3 class="project-title">Home Interior App</h3>
+                    <p class="project-description">
+                        An innovative application featuring dedicated interfaces for both clients and administrators. Clients can explore 
+                        potential matches based on personalized preferences, with access gated by a subscription model. The admin panel 
+                        enables full control over user profiles, including subscription plan management, approval workflows, and the 
+                        ability to block or delete users as needed.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2 class="section-title">Certifications</h2>
+            </div>
+            <div class="certifications-list">
+                <div class="certification-item fade-in">
+                    <div class="cert-icon">🏆</div>
+                    <div class="cert-content">
+                        <h3>Programming in Java - Elite Grade</h3>
+                        <p class="cert-provider">NPTEL</p>
+                    </div>
+                </div>
+                <div class="certification-item fade-in">
+                    <div class="cert-icon">📚</div>
+                    <div class="cert-content">
+                        <h3>Java Data Structures for Beginners</h3>
+                        <p class="cert-provider">Great Learning</p>
+                    </div>
+                </div>
+                <div class="certification-item fade-in">
+                    <div class="cert-icon">💻</div>
+                    <div class="cert-content">
+                        <h3>Java Programming</h3>
+                        <p class="cert-provider">Infosys SpringBoard</p>
+                    </div>
+                </div>
+                <div class="certification-item fade-in">
+                    <div class="cert-icon">✅</div>
+                    <div class="cert-content">
+                        <h3>7 Certificates Completed</h3>
+                        <p class="cert-provider">Infosys SpringBoard</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section id="achievements">
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <h2 class="section-title">Achievements</h2>
+            </div>
+            <div class="achievements-grid">
+                <div class="achievement-card fade-in">
+                    <div class="achievement-number">100+</div>
+                    <p class="achievement-text">LeetCode Problems Solved</p>
+                </div>
+                <div class="achievement-card fade-in">
+                    <div class="achievement-number">07</div>
+                    <p class="achievement-text">Infosys SpringBoard Certifications</p>
+                </div>
+                <div class="achievement-card fade-in">
+                    <div class="achievement-number">🎯</div>
+                    <p class="achievement-text">Paper Presentation on Java<br>GCT Coimbatore</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p class="footer-text">Let's build something amazing together</p>
+            <div class="footer-links">
+                <a href="/cdn-cgi/l/email-protection#d9bbb8b5b8bbb1b8abb8adb1b0e0eee1eeeced99beb4b8b0b5f7bab6b4" class="footer-link">✉</a>
+                <a href="https://www.linkedin.com/in/bala-bharathi-032a562a3" target="_blank" class="footer-link">in</a>
+                <a href="https://github.com/Balabharathi2005" target="_blank" class="footer-link">{ }</a>
+            </div>
+            <p class="footer-text" style="margin-top: 2rem; font-size: 0.9rem;">
+                © 2026 Balabharathi Y. Designed & Developed with passion.
+            </p>
+        </footer>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Cursor glow effect
+        const cursorGlow = document.getElementById('cursorGlow');
+        document.addEventListener('mousemove', (e) => {
+            cursorGlow.style.transform = `translate(${e.clientX - 200}px, ${e.clientY - 200}px)`;
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targ
